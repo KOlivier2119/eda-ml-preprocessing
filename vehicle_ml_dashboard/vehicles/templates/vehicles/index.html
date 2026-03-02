@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vehicle ML Dashboard</title>
+    <!-- Google Font: Inter for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #0b0f19;
+        --sidebar-bg: #111827;
+        --card-bg: #1f2937;
+        --accent-color: #38bdf8;
+        --text-main: #f3f4f6;
+        --text-muted: #9ca3af;
+        --border-color: #374151;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        overflow: hidden; /* Prevent double scrollbars */
+      }
+
+      /* Scrollable Area Styling */
+      .scrollspy-example {
+        height: 92vh;
+        overflow-y: auto;
+        padding: 20px;
+        scroll-behavior: smooth;
+      }
+
+      /* Custom Scrollbar for the scrollable div */
+      .scrollspy-example::-webkit-scrollbar {
+        width: 6px;
+      }
+      .scrollspy-example::-webkit-scrollbar-track {
+        background: var(--bg-color);
+      }
+      .scrollspy-example::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 10px;
+      }
+
+      /* Sidebar Navigation Styling */
+      #dashboard-nav {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .list-group-item {
+        background-color: var(--sidebar-bg);
+        color: var(--text-muted);
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.2rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .list-group-item.active {
+        background-color: var(--accent-color) !important;
+        color: #000 !important;
+        font-weight: 700;
+      }
+
+      .list-group-item:hover:not(.active) {
+        background-color: #1e293b;
+        color: var(--accent-color);
+      }
+
+      /* Card Styling */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      }
+
+      .card-header {
+        background-color: rgba(56, 189, 248, 0.05) !important;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--accent-color);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        padding: 1.25rem;
+      }
+
+      /* TABLE FIXES (Removing the white theme) */
+      .card-body table {
+        width: 100% !important;
+        color: var(--text-main) !important;
+        border-collapse: collapse !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* Ensure no white backgrounds on rows or cells */
+      .card-body th, .card-body td, .card-body tr {
+        background-color: transparent !important;
+        color: var(--text-main) !important;
+        border: 1px solid var(--border-color) !important;
+        padding: 12px 15px !important;
+      }
+
+      .card-body thead th {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+        color: var(--accent-color) !important;
+        border-bottom: 2px solid var(--accent-color) !important;
+      }
+
+      /* Index column styling (the numbers 0-9) */
+      .card-body tbody th {
+        color: var(--accent-color) !important;
+        font-weight: 600;
+        text-align: center;
+        width: 50px;
+      }
+
+      /* Header text */
+      h1 {
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--accent-color);
+      }
+
+      .container-fluid {
+        max-width: 1600px;
+      }
+    </style>
+  </head>
+
+  <body
+    data-bs-spy="scroll"
+    data-bs-target="#dashboard-nav"
+    data-bs-offset="100"
+    tabindex="0"
+  >
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <!-- Sidebar Navigation -->
+        <div class="col-md-3">
+          <div id="dashboard-nav" class="list-group position-sticky top-0">
+            <a
+              class="list-group-item list-group-item-action active"
+              href="#frequency-table"
+              >Frequency Tables (One-way)
+            </a>
+          </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="col-md-9">
+          <div
+            class="scrollspy-example"
+            data-bs-spy="scroll"
+            data-bs-target="#dashboard-nav"
+            data-bs-smooth-scroll="true"
+            tabindex="0"
+          >
+            <h1 class="text-center mb-5">
+              Vehicle Machine Learning Dashboard
+            </h1>
+
+            <div id="frequency-table" class="card mb-5">
+              <div class="card-header">
+                Frequency Tables (One-way)
+              </div>
+              <div class="card-body">
+                <!-- Wrapper to ensure table handles overflows if screens are small -->
+                <div class="table-responsive">
+                  {{ frequency_table|safe }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional spacing to allow scrollspy to trigger -->
+            <div style="height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
