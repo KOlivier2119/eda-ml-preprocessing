@@ -153,6 +153,8 @@
           </a>
           <a class="list-group-item list-group-item-action" href="#crosstab-table">Cross-Tabulation
           </a>
+          <a class="list-group-item list-group-item-action" href="#pivot-table">Pivot Table
+          </a>
         </div>
       </div>
 
@@ -194,6 +196,17 @@
             <div class="card-body">
               <div class="table-responsive">
                 {{ crosstab|safe }}
+              </div>
+            </div>
+          </div>
+
+          <div id="pivot-table" class="card mb-5">
+            <div class="card-header">
+              Pivot Table: Sum Selling Price by Manufacturer &amp;
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                {{ pivot_table|safe }}
               </div>
             </div>
           </div>

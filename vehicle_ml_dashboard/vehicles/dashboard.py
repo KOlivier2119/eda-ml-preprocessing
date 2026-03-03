@@ -56,7 +56,20 @@ def crosstab(df):
     return table_html
 
 
-
+def pivot_table(df): 
+    """Create a pivot table showing average selling price by manufacturer and body type."""
+    pivot_result = pd.pivot_table(
+        df,
+        index=['manufacturer'],
+        values='selling_price',
+        aggfunc='sum'
+    ).reset_index()
+    table_html = pivot_result.to_html(
+        classes="table table-bordered table-striped table-sm",
+        float_format='%.2f',
+        justify='center'
+    )
+    return table_html
 
 
 

@@ -1,6 +1,6 @@
 ﻿import pandas as pd
 from django.shortcuts import render
-from .dashboard import frequency_table, profit_table, crosstab
+from .dashboard import frequency_table, profit_table, crosstab, pivot_table
 
 def dashboard_view(request):
     """Main dashboard view that loads vehicle data and renders charts."""
@@ -11,4 +11,5 @@ def dashboard_view(request):
         "frequency_table": frequency_table(df),
         "profit_table": profit_table(df),
         "crosstab": crosstab(df),
+        "pivot_table": pivot_table(df),
     })
