@@ -19,16 +19,13 @@ def frequency_table(df):
     return table_html
 
 def profit_calculation(df):
-    df["profit"]=df["selling_price"]-df["wholesale_price"]
-    df.groupby(["manufacturer","transmission","fuel_type"]).agg({
-        "profit":"sum",
-        "selling_price":["sum","count"],
-        "wholesale_price":"sum"
-    })
+    """Calculate profit column from selling and wholesale prices."""
+    df["profit"] = df["selling_price"] - df["wholesale_price"]
+    return df
 
 def profit_table(df):
     """Generate a summary of profit by manufacturer."""
-    profit_calculation(df)
+    df = profit_calculation(df)
     profit_summary = (
         df[['manufacturer', 'profit']]
         .groupby('manufacturer', as_index=False)
@@ -44,8 +41,19 @@ def profit_table(df):
     )
     return table_html
 
-def crosstab(df): 
-    return pd.crosstab([df['manufacturer'], df['body_type']],[df["engine_type"], df["transmission"]], margins=True)
+def crosstab(df):
+    """Create a cross-tabulation between manufacturer/body type and engine type/transmission."""
+    crosstab_result = pd.crosstab(
+        [df['manufacturer'], df['body_type']],
+        [df["engine_type"], df["transmission"]],
+        margins=True
+    )
+    table_html = crosstab_result.to_html(
+        classes="table table-bordered table-striped table-sm",
+        float_format='%.2f',
+        justify='center'
+    )
+    return table_html
 
 
 
