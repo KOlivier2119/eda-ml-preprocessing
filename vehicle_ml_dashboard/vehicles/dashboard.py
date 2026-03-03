@@ -56,14 +56,14 @@ def crosstab(df):
     return table_html
 
 
-def pivot_table(df): 
+def pivot_table(df):
     """Create a pivot table showing average selling price by manufacturer and body type."""
     pivot_result = pd.pivot_table(
         df,
-        index=['manufacturer'],
+        index=['manufacturer', 'body_type', 'transmission'],
         values='selling_price',
         aggfunc='sum'
-    ).reset_index()
+    )
     table_html = pivot_result.to_html(
         classes="table table-bordered table-striped table-sm",
         float_format='%.2f',
@@ -71,5 +71,8 @@ def pivot_table(df):
     )
     return table_html
 
-
-
+def visualizing_sales_with_sunburst(df, height=800):
+    fig = px.sunburst(df, path=["manufacturer", "fuel_type"], values="selling_price",)
+    fig.update_traces(textinfo="label+value"),
+    fig.update_layout(height=height)
+    return opy.plot(fig, output_type='div')

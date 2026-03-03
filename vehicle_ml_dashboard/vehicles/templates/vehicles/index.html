@@ -155,6 +155,8 @@
           </a>
           <a class="list-group-item list-group-item-action" href="#pivot-table">Pivot Table
           </a>
+          <a class="list-group-item list-group-item-action" href="#sunburst-chart">Sunburst Chart
+          </a>
         </div>
       </div>
 
@@ -208,6 +210,15 @@
               <div class="table-responsive">
                 {{ pivot_table|safe }}
               </div>
+            </div>
+          </div>
+
+          <div id="sunburst-chart" class="card mb-5">
+            <div class="card-header">
+              Sunburst Chart: Hierarchical Vehicle Distribution
+            </div>
+            <div class="card-body">
+              {{ sunburst_chart|safe }}
             </div>
           </div>
 
